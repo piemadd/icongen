@@ -22,13 +22,13 @@ allColorSets = [...new Set(allColorSets.map(n => n.toUpperCase()).sort())]
 const iconTemplate = fs.readFileSync('./template.svg', 'utf8');
 
 allColorSets.forEach((colorSet) => {
-  const iconFilled = iconTemplate.replaceAll("#FFFFFF", `#${colorSet.split('_')[0]}`).replaceAll("#000000", colorSet.split('_')[1]);
+  const iconFilled = iconTemplate.replaceAll("#FFFFFF", `#${colorSet.split('_')[0].slice(0, 6)}`).replaceAll("#000000", `#${colorSet.split('_')[1].slice(0, 6)}`);
   const iconBuffer = Buffer.from(iconFilled, 'utf8');
 
   sharp(iconBuffer)
     .resize(120, 120)
     .png()
-    .toFile(`./icons/${colorSet}.png`, (err, info) => {
+    .toFile(`./icons/${colorSet.split('_')[0].slice(0, 6)}_${colorSet.split('_')[1].slice(0, 6)}.png`, (err, info) => {
       if (err) throw err;
     });
 })
