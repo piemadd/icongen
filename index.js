@@ -21,6 +21,8 @@ allColorSets = [...new Set(allColorSets.map(n => n.toUpperCase()).sort())]
 //template svg
 const iconTemplate = fs.readFileSync('./template.svg', 'utf8');
 
+let allIconFiles = [];
+
 allColorSets.forEach((colorSet) => {
   const iconFilled = iconTemplate.replaceAll("#FFFFFF", `#${colorSet.split('_')[0].slice(0, 6)}`).replaceAll("#000000", `#${colorSet.split('_')[1].slice(0, 6)}`);
   const iconBuffer = Buffer.from(iconFilled, 'utf8');
@@ -31,4 +33,8 @@ allColorSets.forEach((colorSet) => {
     .toFile(`./icons/${colorSet.split('_')[0].slice(0, 6)}_${colorSet.split('_')[1].slice(0, 6)}.png`, (err, info) => {
       if (err) throw err;
     });
+
+    allIconFiles.push(`${colorSet.split('_')[0].slice(0, 6)}_${colorSet.split('_')[1].slice(0, 6)}`)
 })
+
+fs.writeFileSync('./allIconFiles.json', JSON.stringify(allIconFiles));
