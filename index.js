@@ -24,7 +24,7 @@ const iconTemplate = fs.readFileSync('./template.svg', 'utf8');
 let allIconFiles = [];
 
 allColorSets.forEach((colorSet) => {
-  const iconFilled = iconTemplate.replaceAll("#FFFFFF", `#${colorSet.split('_')[0].slice(0, 6)}`).replaceAll("#000000", `#${colorSet.split('_')[1].slice(0, 6)}`);
+  const iconFilled = iconTemplate.replaceAll("FILL", `#${colorSet.split('_')[0].slice(0, 6)}`).replaceAll("STROKE", `#${colorSet.split('_')[1].slice(0, 6)}`);
   const iconBuffer = Buffer.from(iconFilled, 'utf8');
 
   sharp(iconBuffer)
