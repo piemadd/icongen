@@ -16,6 +16,9 @@ for (let i = 0; i < inputFiles.length; i++) {
   allColorSets.push(...inputFileContent)
 }
 
+//all white borders cuz why not
+//allColorSets = allColorSets.map((colorSet) => `${colorSet.split('_')[0].slice(0, 6)}_FFFFFF`)
+
 allColorSets = [...new Set(allColorSets.map(n => n.toUpperCase()).sort())]
 
 //template svg
